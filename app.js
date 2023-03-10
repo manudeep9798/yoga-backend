@@ -5,11 +5,16 @@ const cors = require('cors');
 const app = express();
 const StudentRoute = require('./routes/students.route')
 const teacherRoute = require('./routes/teacher.route')
+const asanas = require('./routes/asana.route')
 
 app.use(express.json());
-app.use(cors({
-    origin:'*'
-}))
+const corsOptions ={
+    origin:'http://localhost:3000', 
+    credentials:true,            
+    optionSuccessStatus:200
+}
+app.use(cors(corsOptions))
+app.options('*', cors())
 const startApp=async()=>{
     //starting the server
     await app.listen(4000,()=>console.log(`on port 4000`))
@@ -23,6 +28,7 @@ const startApp=async()=>{
     })
     app.use('/students',StudentRoute)
     app.use('/teacher',teacherRoute)
+    app.use('/asanas',asanas)
 }
 
 

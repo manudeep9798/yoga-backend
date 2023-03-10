@@ -8,6 +8,7 @@ async function login({email,password},callback){
     if(user!=null){
         if(bcrypt.compareSync(password,user.password)){
             const token = auth.generateAccessToken(email);
+            console.log(token)
             return callback(null, {...user.toJSON(),token});
         }
         else{

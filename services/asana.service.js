@@ -1,5 +1,4 @@
-const StudentUser=require('../models/student.model');
-const bcrypt = require('bcrypt');
+const Asana=require('../models/asanas.model');
 const auth = require('../middlewares/auth');
 
 
@@ -21,23 +20,26 @@ async function login({email,password},callback){
         })
     }
 }
+const addAsana=async (data,callback)=>{
+    try{
+        const asana = new Asana(data);
+        asana.save()
+        .then((response) => {
+            return callback(null,response)
+        })
+        .catch((err) => {
+            return callback(err)
+        })
 
-
-async function register(params,callback){
-    if(params.username===undefined ){
-        return callback({message:"Username is required"})
+    }catch(err){
+        return callback({
+            message:err.message,
+        },null)
     }
-    const user = new StudentUser(params);
-    user.save()
-    .then((response) => {
-        return callback(null,response)
-    })
-    .catch((err) => {
-        return callback(err)
-    })
+    
 }
 
 module.exports ={
     login,
-    register
+    addAsana
 }

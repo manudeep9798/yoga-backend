@@ -22,7 +22,7 @@ const login = (req,res,next)=>{
 
     userService.login({email,password},(err,result)=>{
         if(err) return next(err);
-        return res.status(200).cookie('auth-token-yoga', process.env.ACCESS_TOKEN_SECRET + ' ' + result.token,{httpOnly: true}).send({message:"Success"})
+        return res.status(200).cookie('auth-token-yoga-student', process.env.ACCESS_TOKEN_SECRET + ' ' + result.token,{httpOnly: true}).send({message:"Success"})
     })
 }
 const verifyLogin=async(req,res,next)=>{
@@ -46,5 +46,5 @@ const verifyLogin=async(req,res,next)=>{
 module.exports={
     register,
     login,
-    verifyLogin
+    verifyLogin,
 }
