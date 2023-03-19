@@ -6,6 +6,7 @@ const app = express();
 const StudentRoute = require('./routes/students.route')
 const teacherRoute = require('./routes/teacher.route')
 const asanas = require('./routes/asana.route')
+const flow = require('./routes/flow.routes')
 
 app.use(express.json());
 const corsOptions ={
@@ -29,6 +30,7 @@ const startApp=async()=>{
     app.use('/students',StudentRoute)
     app.use('/teacher',teacherRoute)
     app.use('/asanas',asanas)
+    app.use('/flow',flow)
 }
 
 

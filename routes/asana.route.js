@@ -5,5 +5,6 @@ const router = express.Router();
 
 
 router.post('/add',userController.addAsana)
+router.get('/find',userController.findAssanas)
 
 module.exports = router
