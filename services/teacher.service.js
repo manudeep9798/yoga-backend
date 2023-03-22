@@ -1,6 +1,6 @@
 const TeacherUser=require('../models/teacher.model');
 const bcrypt = require('bcrypt');
-const auth = require('../middlewares/auth');
+const auth = require('../middlewares/auth_teacher');
 
 
 async function login({email,password},callback){

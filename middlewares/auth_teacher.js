@@ -16,7 +16,7 @@ const authenticateToken=(req,res,next)=>{
 }
 
 const generateAccessToken=(username)=>{
-    return jwt.sign({data:username},process.env.ACCESS_TOKEN_SECRET,{},{ expireIn:'1h',});
+    return jwt.sign({data:username},process.env.ACCESS_TOKEN_SECRET_TEACHER,{},{ expireIn:'1h',});
 }
 
 

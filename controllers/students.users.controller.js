@@ -22,16 +22,17 @@ const login = (req,res,next)=>{
 
     userService.login({email,password},(err,result)=>{
         if(err) return next(err);
-        return res.status(200).cookie('auth-token-yoga-student', process.env.ACCESS_TOKEN_SECRET + ' ' + result.token,{httpOnly: true}).send({message:"Success"})
+        return res.status(200).cookie('auth-token-yoga-student', process.env.ACCESS_TOKEN_SECRET_STUDENT + ' ' + result.token,{httpOnly: true}).send({
+            message:"Success",
+            token:result.token
+        })
     })
 }
 const verifyLogin=async(req,res,next)=>{
     if(!req.headers['authorization']) return res.status(401).send({message:"Unauthorized"})
     const authHeader = await req.headers['authorization'];
-    const bearerToken = await authHeader.split(' ')
-    const token = await bearerToken[1];
 
-    JWT.verify(token, process.env.ACCESS_TOKEN_SECRET,(err,payload)=>{
+    JWT.verify(authHeader, process.env.ACCESS_TOKEN_SECRET_STUDENT,(err,payload)=>{
         if(err) {
             return res.status(403).send({message:"Unauthorized1"+err.message})
         }

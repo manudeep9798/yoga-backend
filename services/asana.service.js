@@ -1,25 +1,6 @@
 const Asana=require('../models/asanas.model');
-const auth = require('../middlewares/auth');
 
 
-async function login({email,password},callback){
-    const user = await StudentUser.findOne({email:email});
-    if(user!=null){
-        if(bcrypt.compareSync(password,user.password)){
-            const token = auth.generateAccessToken(email);
-            return callback(null, {...user.toJSON(),token});
-        }
-        else{
-            return callback({
-                message:"Invalid Username/Password!",
-            })
-        }
-    }else{
-        return  callback({
-            message:"Invalid Username/Password!",
-        })
-    }
-}
 const addAsana=async (data,callback)=>{
     try{
         const asana = new Asana(data);
@@ -67,7 +48,6 @@ const findAssanas=async (data,callback)=>{
     }
 }
 module.exports ={
-    login,
     addAsana,
     findAssanas
 }

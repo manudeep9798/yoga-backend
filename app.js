@@ -10,7 +10,7 @@ const flow = require('./routes/flow.routes')
 
 app.use(express.json());
 const corsOptions ={
-    origin:'http://localhost:3000', 
+    origin:'http://localhost:3001', 
     credentials:true,            
     optionSuccessStatus:200
 }
@@ -27,7 +27,7 @@ const startApp=async()=>{
         if(err)console.log('error is ', err)
         else console.log('connected to database')
     })
-    app.use('/students',StudentRoute)
+    app.use('/student',StudentRoute)
     app.use('/teacher',teacherRoute)
     app.use('/asanas',asanas)
     app.use('/flow',flow)

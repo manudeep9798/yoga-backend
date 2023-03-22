@@ -31,17 +31,15 @@ const login = (req,res,next)=>{
 const verifyLogin=async(req,res,next)=>{
     if(!req.headers['authorization']) return res.status(401).send({message:"Unauthorized"})
     const authHeader = await req.headers['authorization'];
-    const bearerToken = await authHeader.split(' ')
-    const token = await bearerToken[1];
 
-    JWT.verify(token, process.env.ACCESS_TOKEN_SECRET,(err,payload)=>{
+    JWT.verify(authHeader, process.env.ACCESS_TOKEN_SECRET_TEACHER,(err,payload)=>{
         if(err) {
             return res.status(403).send({message:"Unauthorized1"+err.message})
         }
         req.payload=payload;
-        return res.status(200).cookie('auth-token-yoga-teacher', process.env.ACCESS_TOKEN_SECRET + ' ' + result.token,{httpOnly: true}).send({
+        res.status(200).send({
             message:"Success",
-            token: result.token
+            loginStatus:true,
         })
     })
 }
