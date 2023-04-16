@@ -19,7 +19,6 @@ const register = (req,res,next)=>{
 }
 const login = (req,res,next)=>{
     const {password,email} = req.body;
-
     userService.login({email,password},(err,result)=>{
         if(err) return next(err);
         return res.status(200).cookie('auth-token-yoga-student', process.env.ACCESS_TOKEN_SECRET_STUDENT + ' ' + result.token,{httpOnly: true}).send({

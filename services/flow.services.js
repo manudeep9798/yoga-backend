@@ -18,7 +18,13 @@ const addFlow=async (data,callback)=>{
     }
     
 }
+const getFlows=(data,callback)=>{
+     Flow.find().then((res)=>{
+        return callback(null,{data:res})
+     })
 
+}
 module.exports ={
-    addFlow
+    addFlow,
+    getFlows
 }

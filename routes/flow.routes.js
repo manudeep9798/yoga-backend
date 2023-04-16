@@ -5,6 +5,7 @@ const router = express.Router();
 
 
 router.post('/add',userController.addFlow)
+router.get('/find',userController.getFlows)
 // router.get('/find',userController.findAssanas)
 
 module.exports = router

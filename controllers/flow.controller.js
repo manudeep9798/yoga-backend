@@ -2,7 +2,6 @@ const userService= require('../services/flow.services');
 require('dotenv').config();
 
 
-
 const addFlow = (req,res,next)=>{
     const data = req.body;
       
@@ -11,7 +10,15 @@ const addFlow = (req,res,next)=>{
         return res.status(200).send(result)
     })
 }
+const getFlows = (req,res,next)=>{
+    const data = req.body || {};
+    userService.getFlows(data,(err,result)=>{
+        if(err) return next(err);
+        return res.status(200).send(result)
+    })
+}
 
 module.exports={
-    addFlow
+    addFlow,
+    getFlows
 }
