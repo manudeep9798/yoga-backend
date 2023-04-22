@@ -5,10 +5,14 @@ const auth = require('../middlewares/auth_teacher');
 
 async function login({email,password},callback){
     const user = await TeacherUser.findOne({email:email});
-    if(user!=null){
+    console.log("here",user);
+    if(user===null){
+        return  callback({
+            message:"Invalid Username/Password!",
+        })
+    }else{
         if(bcrypt.compareSync(password,user.password)){
             const token = auth.generateAccessToken(email);
-            console.log(token)
             return callback(null, {...user.toJSON(),token});
         }
         else{
@@ -16,11 +20,22 @@ async function login({email,password},callback){
                 message:"Invalid Username/Password!",
             })
         }
-    }else{
-        return  callback({
-            message:"Invalid Username/Password!",
-        })
     }
+    // if(user!=null){
+    //     if(bcrypt.compareSync(password,user.password)){
+    //         const token = auth.generateAccessToken(email);
+    //         return callback(null, {...user.toJSON(),token});
+    //     }
+    //     else{
+    //         return callback({
+    //             message:"Invalid Username/Password!",
+    //         })
+    //     }
+    // }else{
+    //     return  callback({
+    //         message:"Invalid Username/Password!",
+    //     })
+    // }
 }
 
 

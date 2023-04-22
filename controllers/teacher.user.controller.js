@@ -19,7 +19,6 @@ const register = (req,res,next)=>{
 }
 const login = (req,res,next)=>{
     const {password,email} = req.body;
-    
     userService.login({email,password},(err,result)=>{
         if(err) return next(err);
         return res.status(200).cookie('auth-token-yoga', process.env.ACCESS_TOKEN_SECRET + ' ' + result.token,{httpOnly: true}).send({
@@ -40,6 +39,7 @@ const verifyLogin=async(req,res,next)=>{
         res.status(200).send({
             message:"Success",
             loginStatus:true,
+            user:req.payload.data
         })
     })
 }
