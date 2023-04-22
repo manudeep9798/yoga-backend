@@ -7,7 +7,9 @@ const StudentRoute = require('./routes/students.route')
 const teacherRoute = require('./routes/teacher.route')
 const asanas = require('./routes/asana.route')
 const flow = require('./routes/flow.routes')
-
+var bodyParser = require('body-parser');
+app.use(bodyParser.json({limit: "50mb"}));
+app.use(bodyParser.urlencoded({limit: "50mb", extended: true, parameterLimit:50000}))
 app.use(express.json());
 const corsOptions ={
     origin:'http://localhost:3000', 
@@ -18,6 +20,7 @@ app.use(cors(corsOptions))
 app.options('*', cors())
 const startApp=async()=>{
     //starting the server
+    app.use(express.json({limit:'50mb'}));
     await app.listen(4000,()=>console.log(`on port 4000`))
     //connecting to mongodb server
     mongoose.set("strictQuery", false);

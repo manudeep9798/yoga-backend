@@ -19,6 +19,9 @@ const asanaSchema=new Schema({
         type:String,
         required:true,
     },
+    author:{
+        type:String,
+    },
     level:{
         type:String,
     },
