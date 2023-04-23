@@ -28,7 +28,6 @@ const getFlows=(data,callback)=>{
 const getAuthor=(data,callback)=>{
     if(data){
         Teacher.findOne({email:data.id}).then((res)=>{
-            console.log(res);
             return callback(null,{data:res})
         })
     }

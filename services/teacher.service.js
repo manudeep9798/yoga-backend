@@ -5,7 +5,6 @@ const auth = require('../middlewares/auth_teacher');
 
 async function login({email,password},callback){
     const user = await TeacherUser.findOne({email:email});
-    console.log("here",user);
     if(user===null){
         return  callback({
             message:"Invalid Username/Password!",
@@ -43,9 +42,6 @@ async function register(params,callback){
     if(params.username===undefined ){
         return callback({message:"Username is required"})
     }
-    // const checkEmail = await TeacherUser.findOne({email:params.email})
-    // console.log(checkEmail)
-    // if(checkEmail)return callback({message:"Email already registered"})
     const user = new TeacherUser(params);
     user.save()
     .then((response) => {
