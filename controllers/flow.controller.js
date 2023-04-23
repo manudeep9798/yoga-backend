@@ -1,3 +1,4 @@
+const { data } = require('jquery');
 const userService= require('../services/flow.services');
 require('dotenv').config();
 
@@ -17,8 +18,15 @@ const getFlows = (req,res,next)=>{
         return res.status(200).send(result)
     })
 }
-
+const getAuthor=(req,res,next)=>{
+    const data=req.body
+    userService.getAuthor(data,(err,result)=>{
+        if(err) return next(err);
+        return res.status(200).send(result)
+    })
+}
 module.exports={
     addFlow,
-    getFlows
+    getFlows,
+    getAuthor
 }

@@ -1,4 +1,5 @@
 const Flow=require('../models/flow.model');
+const Teacher=require('../models/teacher.model');
 
 const addFlow=async (data,callback)=>{
     try{
@@ -24,7 +25,16 @@ const getFlows=(data,callback)=>{
      })
 
 }
+const getAuthor=(data,callback)=>{
+    if(data){
+        Teacher.findOne({email:data.id}).then((res)=>{
+            console.log(res);
+            return callback(null,{data:res})
+        })
+    }
+}
 module.exports ={
     addFlow,
-    getFlows
+    getFlows,
+    getAuthor
 }

@@ -11,25 +11,8 @@ const flowSchema=new Schema({
         type:Array,
         required:true
     },
-    level:{
-        type:String,
-    },
-    duration:{
-        type:String,
-    },
-    startTime:{
-        type:String,
-    },
-    endTime:{
-        type:String,
-    },
-    date:{
-        type:Date,
-        default:Date.now()
-    },
-    allowedLimit:{
-        type:Number,
-        required:true,
+    createdBy:{
+        type:String
     }
 })
 
