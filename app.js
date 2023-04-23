@@ -7,6 +7,7 @@ const StudentRoute = require('./routes/students.route')
 const teacherRoute = require('./routes/teacher.route')
 const asanas = require('./routes/asana.route')
 const flow = require('./routes/flow.routes')
+const classes = require('./routes/class.route')
 var bodyParser = require('body-parser');
 app.use(bodyParser.json({limit: "50mb"}));
 app.use(bodyParser.urlencoded({limit: "50mb", extended: true, parameterLimit:50000}))
@@ -34,6 +35,7 @@ const startApp=async()=>{
     app.use('/teacher',teacherRoute)
     app.use('/asanas',asanas)
     app.use('/flow',flow)
+    app.use('/class',classes)
 }
 
 
