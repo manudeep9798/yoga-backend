@@ -13,6 +13,9 @@ const flowSchema=new Schema({
     },
     createdBy:{
         type:String
+    },
+    difficulty:{
+        type:String
     }
 })
 
