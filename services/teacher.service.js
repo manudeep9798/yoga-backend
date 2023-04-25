@@ -51,8 +51,18 @@ async function register(params,callback){
         return callback(err)
     })
 }
+const findAuthor=async(id,cb)=>{
+    try{
+        console.log(id);
+        const user = await TeacherUser.findOne({email:id});
+        cb(null,user.username)
+    }catch(err){
+        cb(err,null)
+    }
 
+}
 module.exports ={
     login,
-    register
+    register,
+    findAuthor
 }

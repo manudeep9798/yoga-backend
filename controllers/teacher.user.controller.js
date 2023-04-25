@@ -44,8 +44,20 @@ const verifyLogin=async(req,res,next)=>{
     })
 }
 
+
+const findAuthor=async(req,res,next)=>{
+    userService.findAuthor(req.body.id,(err,result)=>{
+        if(err){
+            res.status(400).json({err})
+        }else{
+            res.status(200).json({Author:result})
+        }
+    })
+}
+
 module.exports={
     register,
     login,
-    verifyLogin
+    verifyLogin,
+    findAuthor
 }

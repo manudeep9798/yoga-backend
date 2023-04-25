@@ -29,6 +29,9 @@ const classSchema=new Schema({
     },
     author:{
         type:String
+    },
+    booked:{
+        type:Number
     }
 })
 
