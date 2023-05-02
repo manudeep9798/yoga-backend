@@ -18,6 +18,13 @@ const getFlows = (req,res,next)=>{
         return res.status(200).send(result)
     })
 }
+const getOneFlow = (req,res,next)=>{
+    const data = req.body || {};
+    userService.getFlows(data,(err,result)=>{
+        if(err) return next(err);
+        return res.status(200).send(result)
+    })
+}
 const getAuthor=(req,res,next)=>{
     const data=req.body
     userService.getAuthor(data,(err,result)=>{
@@ -28,5 +35,6 @@ const getAuthor=(req,res,next)=>{
 module.exports={
     addFlow,
     getFlows,
-    getAuthor
+    getAuthor,
+    getOneFlow
 }

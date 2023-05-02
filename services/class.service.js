@@ -21,13 +21,19 @@ const addClass=async (data,callback)=>{
 }
 const getClass=(data,callback)=>{
     try{
-        const classes = Classes.find()
-        .then((response) => {
-            return callback(null,response)
-        })
-        .catch((err) => {
-            return callback(err)
-        })
+        if(data.id){
+            Classes.findById(ObjectId(data.id)).then((res)=>{
+                return callback(null,{data:res})
+             })
+        }else{
+            const classes = Classes.find()
+            .then((response) => {
+                return callback(null,response)
+            })
+            .catch((err) => {
+                return callback(err)
+            })
+        }
 
     }catch(err){
         return callback({

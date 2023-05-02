@@ -22,7 +22,7 @@ const classSchema=new Schema({
         type:String,
     },
     flow:{
-        type:String
+        type:Object
     },
     duration:{
         type:String

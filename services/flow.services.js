@@ -1,3 +1,4 @@
+const { ObjectId } = require('mongodb');
 const Flow=require('../models/flow.model');
 const Teacher=require('../models/teacher.model');
 
@@ -20,9 +21,16 @@ const addFlow=async (data,callback)=>{
     
 }
 const getFlows=(data,callback)=>{
-     Flow.find().then((res)=>{
-        return callback(null,{data:res})
-     })
+    if(data.id){
+        // return callback(null,{data:data.id})
+        Flow.find({"_id":new ObjectId(data.id)}).then((res)=>{
+            return callback(null,{data:res})
+         })
+    }else{
+        Flow.find().then((res)=>{
+           return callback(null,{data:res})
+        })
+    }
 
 }
 const getAuthor=(data,callback)=>{
