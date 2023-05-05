@@ -31,7 +31,7 @@ const findAssanas=async (data,callback)=>{
                 },null)
             })
        }else{
-        Asana.find().then((res)=>{
+        Asana.find({author:data.author}).then((res)=>{
             return callback(null,res)
         })
         .catch((err)=>{

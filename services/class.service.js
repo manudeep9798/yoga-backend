@@ -26,7 +26,7 @@ const getClass=(data,callback)=>{
                 return callback(null,{data:res})
              })
         }else{
-            const classes = Classes.find()
+            const classes = Classes.find({author:data.author})
             .then((response) => {
                 return callback(null,response)
             })

@@ -5,6 +5,6 @@ const router = express.Router();
 
 
 router.post('/add',userController.addClass)
-router.get('/find',userController.getClass)
+router.post('/find',userController.getClass)
 
 module.exports = router

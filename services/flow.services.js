@@ -22,12 +22,13 @@ const addFlow=async (data,callback)=>{
 }
 const getFlows=(data,callback)=>{
     if(data.id){
+        console.log(data.id);
         // return callback(null,{data:data.id})
         Flow.find({"_id":new ObjectId(data.id)}).then((res)=>{
             return callback(null,{data:res})
          })
     }else{
-        Flow.find().then((res)=>{
+        Flow.find({createdBy:data.author}).then((res)=>{
            return callback(null,{data:res})
         })
     }
