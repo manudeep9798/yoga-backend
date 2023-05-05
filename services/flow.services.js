@@ -28,6 +28,7 @@ const getFlows=(data,callback)=>{
             return callback(null,{data:res})
          })
     }else{
+        console.log(data);
         Flow.find({createdBy:data.author}).then((res)=>{
            return callback(null,{data:res})
         })
