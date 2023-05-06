@@ -39,12 +39,20 @@ const verifyLogin=async(req,res,next)=>{
         res.status(200).send({
             message:"Success",
             loginStatus:true,
+            user:req.payload.data
         })
     })
 }
-
+const BookingDetails = (req,res,next)=>{
+    
+    userService.BookingDetails(req.headers.username,(err,result)=>{
+        if(err) return next(err);
+        return res.status(200).json(result);
+    })
+}
 module.exports={
     register,
     login,
     verifyLogin,
+    BookingDetails
 }

@@ -6,5 +6,6 @@ const router = express.Router();
 
 router.post('/add',userController.addAsana)
 router.post('/find',userController.findAssanas)
+router.put('/update',userController.updateAssana)
 
 module.exports = router

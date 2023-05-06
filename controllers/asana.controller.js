@@ -18,8 +18,16 @@ const findAssanas = (req,res,next)=>{
         return res.status(200).send(result)
     })
 }
+const updateAssana = (req,res,next)=>{
+    const data = req.body;
+    userService.updateAssana(data,(err,result)=>{
+        if(err) return next(err);
+        return res.status(200).send(result)
+    })
+}
 
 module.exports={
     addAsana,
-    findAssanas
+    findAssanas,
+    updateAssana
 }

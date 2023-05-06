@@ -9,5 +9,6 @@ router.post('/find',userController.getFlows)
 router.post('/findOne',userController.getOneFlow)
 // router.get('/find',userController.findAssanas)
 router.post('/findAuthor',userController.getAuthor)
+router.put('/update',userController.updateFlow)
 
 module.exports = router

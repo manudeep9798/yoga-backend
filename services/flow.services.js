@@ -42,8 +42,24 @@ const getAuthor=(data,callback)=>{
         })
     }
 }
+const updateFlow=(data,callback)=>{
+    try{
+        console.log(data.data.id);
+        Flow.findOneAndUpdate({_id:data.data.id},{
+            $set:{"flow":data.data.flow}
+        }).then((response) => {
+            console.log("response",response);
+            return callback(null,{data:response})
+        })
+    }catch(err){
+        return callback({
+            message:err.message,
+        },null)
+    }
+}
 module.exports ={
     addFlow,
     getFlows,
-    getAuthor
+    getAuthor,
+    updateFlow
 }

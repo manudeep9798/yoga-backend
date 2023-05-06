@@ -31,8 +31,9 @@ const classSchema=new Schema({
         type:String
     },
     booked:{
-        type:Number
-    }
+        type:Array,
+        default:[]
+    },
 })
 
 classSchema.set("toJSON",{

@@ -47,7 +47,23 @@ const findAssanas=async (data,callback)=>{
         },null)
     }
 }
+const updateAssana=(data,callback)=>{
+    try{
+        console.log(data.data.id);
+        Asana.findOneAndUpdate({_id:data.data.id},{
+            $set:{"catergory":data.data.catergory,"level":data.data.level,"description":data.data.description}
+        }).then((response) => {
+            console.log("response",response);
+            return callback(null,{data:response})
+        })
+    }catch(err){
+        return callback({
+            message:err.message,
+        },null)
+    }
+    }
 module.exports ={
     addAsana,
-    findAssanas
+    findAssanas,
+    updateAssana
 }

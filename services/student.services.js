@@ -1,4 +1,5 @@
 const StudentUser=require('../models/student.model');
+const Classes=require('../models/class.model');
 const bcrypt = require('bcrypt');
 const auth = require('../middlewares/auth_student');
 
@@ -36,8 +37,17 @@ async function register(params,callback){
         return callback(err)
     })
 }
-
+async function BookingDetails(username,callback){
+    console.log(username);
+    StudentUser.findOne({email:username}).then((response) => {
+        Classes.find({_id:response?.wishList}).then((res) => {
+            return callback(null,{data:res})
+        })
+    })
+    
+}
 module.exports ={
     login,
-    register
+    register,
+    BookingDetails
 }
