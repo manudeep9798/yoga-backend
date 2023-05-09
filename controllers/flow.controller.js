@@ -34,6 +34,7 @@ const getAuthor=(req,res,next)=>{
 }
 const updateFlow=(req,res,next)=>{
     const data=req.body
+    console.log(data.items);
     userService.updateFlow(data,(err,result)=>{
         if(err) return next(err);
         return res.status(200).send(result)
