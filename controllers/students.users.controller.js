@@ -50,9 +50,27 @@ const BookingDetails = (req,res,next)=>{
         return res.status(200).json(result);
     })
 }
+const getAll = (req,res,next)=>{
+    
+    userService.getAll((err,result)=>{
+        if(err) return next(err);
+        return res.status(200).json(result);
+    })
+}
+const deleteUser=async(req,res,next)=>{
+    userService.deleteUser(req.body.id,(err,result)=>{
+        if(err){
+            res.status(400).json({err})
+        }else{
+            res.status(200).json({Author:result})
+        }
+    })
+}
 module.exports={
     register,
     login,
     verifyLogin,
-    BookingDetails
+    BookingDetails,
+    getAll,
+    deleteUser
 }

@@ -46,8 +46,22 @@ async function BookingDetails(username,callback){
     })
     
 }
+async function getAll(callback){
+    StudentUser.find().then((response) => {
+       
+            return callback(null,{data:response})
+    }) 
+}
+async function deleteUser(data,callback){
+    StudentUser.findOneAndDelete({_id:data}).then((response) => {
+        console.log(response);
+        callback(null,response)
+    })
+}
 module.exports ={
     login,
     register,
-    BookingDetails
+    BookingDetails,
+    getAll,
+    deleteUser
 }

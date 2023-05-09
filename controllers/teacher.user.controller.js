@@ -44,7 +44,13 @@ const verifyLogin=async(req,res,next)=>{
     })
 }
 
-
+const getAll = (req,res,next)=>{
+    
+    userService.getAll((err,result)=>{
+        if(err) return next(err);
+        return res.status(200).json(result);
+    })
+}
 const findAuthor=async(req,res,next)=>{
     userService.findAuthor(req.body.id,(err,result)=>{
         if(err){
@@ -54,10 +60,30 @@ const findAuthor=async(req,res,next)=>{
         }
     })
 }
-
+const verify=async(req,res,next)=>{
+    userService.verify(req.body.id,(err,result)=>{
+        if(err){
+            res.status(400).json({err})
+        }else{
+            res.status(200).json({Author:result})
+        }
+    })
+}
+const deleteUser=async(req,res,next)=>{
+    userService.deleteUser(req.body.id,(err,result)=>{
+        if(err){
+            res.status(400).json({err})
+        }else{
+            res.status(200).json({Author:result})
+        }
+    })
+}
 module.exports={
     register,
     login,
     verifyLogin,
-    findAuthor
+    findAuthor,
+    getAll,
+    verify,
+    deleteUser
 }

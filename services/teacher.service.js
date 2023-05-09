@@ -60,8 +60,32 @@ const findAuthor=async(id,cb)=>{
     }
 
 }
+async function getAll(callback){
+    TeacherUser.find().then((response) => {
+       
+            return callback(null,{data:response})
+    })
+    
+}
+async function verify(data,callback){
+    TeacherUser.findOneAndUpdate({_id:data},{
+        $set:{"verified":true}
+    }).then((response) => {
+        callback(null,response)
+    })
+    
+}
+async function deleteUser(data,callback){
+    TeacherUser.findOneAndDelete({_id:data}).then((response) => {
+        callback(null,response)
+    })
+    
+}
 module.exports ={
     login,
     register,
-    findAuthor
+    findAuthor,
+    getAll,
+    verify,
+    deleteUser
 }

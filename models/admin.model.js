@@ -2,25 +2,14 @@ const mongoose = require('mongoose');
 
 const {Schema}= mongoose;
 
-const uniqueValidator= require('mongoose-unique-validator');
-
-const teacherSchema=new Schema({
+const admin=new Schema({
     username:{
         type:String,
         required:true,
     },
-    email:{
-        type:String,
-        required:true,
-        unique:true
-    },
     password:{
         type:String,
         required:true,
-    },
-    verified:{
-        type:Boolean,
-        default:false,
     },
     date:{
         type:Date,
@@ -28,7 +17,7 @@ const teacherSchema=new Schema({
     }
 })
 
-teacherSchema.set("toJSON",{
+admin.set("toJSON",{
     transform:(document,returnObject)=>{
         returnObject.id=returnObject._id.toString();
         delete returnObject._id;
@@ -37,7 +26,5 @@ teacherSchema.set("toJSON",{
     }
 })
 
-teacherSchema.plugin(uniqueValidator,{message:"Email already in use"});
-
-const TeacherUser= mongoose.model("TeacherUser",teacherSchema);
-module.exports=TeacherUser
+const AdminSchema= mongoose.model("Admin",admin);
+module.exports=AdminSchema
