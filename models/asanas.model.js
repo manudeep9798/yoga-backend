@@ -25,6 +25,9 @@ const asanaSchema=new Schema({
     level:{
         type:String,
     },
+    muscles:{
+        type:String,
+    },
     date:{
         type:Date,
         default:Date.now()
