@@ -66,11 +66,21 @@ const deleteUser=async(req,res,next)=>{
         }
     })
 }
+const getList=async(req,res,next)=>{
+    userService.getList(req.body,(err,result)=>{
+        if(err){
+            res.status(400).json({err})
+        }else{
+            res.status(200).json({results:result})
+        }
+    })
+}
 module.exports={
     register,
     login,
     verifyLogin,
     BookingDetails,
     getAll,
-    deleteUser
+    deleteUser,
+    getList
 }
