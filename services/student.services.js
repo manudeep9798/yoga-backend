@@ -58,10 +58,18 @@ async function deleteUser(data,callback){
         callback(null,response)
     })
 }
+async function getList(data,callback){
+    console.log(data);
+    StudentUser.find({email:data}).then((response) => {
+        console.log(response);
+        callback(null,response)
+    })
+}
 module.exports ={
     login,
     register,
     BookingDetails,
     getAll,
-    deleteUser
+    deleteUser,
+    getList
 }
