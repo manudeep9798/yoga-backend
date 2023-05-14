@@ -26,7 +26,7 @@ const startApp=async()=>{
     await app.listen(4000,()=>console.log(`on port 4000`))
     //connecting to mongodb server
     mongoose.set("strictQuery", false);
-    const db=await mongoose.connect(`mongodb://manudeep:${process.env.MONGO_PASS}@cluster0-shard-00-00.2ohia.mongodb.net:27017,cluster0-shard-00-01.2ohia.mongodb.net:27017,cluster0-shard-00-02.2ohia.mongodb.net:27017/yoga?ssl=true&replicaSet=atlas-ry441s-shard-0&authSource=admin&retryWrites=true&w=majority`,{
+    const db=await mongoose.connect(`mongodb://localhost:27017/yoga-test`,{
         useNewUrlParser: true,useUnifiedTopology: true
     },(err)=>{
         if(err)console.log('error is ', err)

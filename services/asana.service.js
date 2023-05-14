@@ -51,7 +51,7 @@ const updateAssana=(data,callback)=>{
     try{
         console.log(data.data.id);
         Asana.findOneAndUpdate({_id:data.data.id},{
-            $set:{"catergory":data.data.catergory,"level":data.data.level,"description":data.data.description}
+            $set:{"catergory":data.data.catergory,"level":data.data.level,"description":data.data.description,"name":data.data.name}
         }).then((response) => {
             console.log("response",response);
             return callback(null,{data:response})
