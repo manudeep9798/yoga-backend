@@ -73,11 +73,8 @@ const updateClassBooking=async(data,callback)=>{
         let limit;
         await Classes.find({_id:data.id}).then((response) => {
             booking=response[0].booked
-<<<<<<< HEAD
             limit=response[0].limit
             // return callback(null,{data:response})
-=======
->>>>>>> 743a97cc456978a18e5745a37edcfeff628da101
         })
         await Student.find({email:data.username}).then((response) => {
             console.log("response",response[0].wishList);
