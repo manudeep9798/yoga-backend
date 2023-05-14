@@ -70,8 +70,10 @@ const updateClassBooking=async(data,callback)=>{
         console.log(data);
         var booking=[]
         var bookingClasses=[]
+        let limit;
         await Classes.find({_id:data.id}).then((response) => {
             booking=response[0].booked
+            limit=response[0].limit
             // return callback(null,{data:response})
         })
         await Student.find({email:data.username}).then((response) => {
@@ -79,6 +81,28 @@ const updateClassBooking=async(data,callback)=>{
             bookingClasses=response[0].wishList
             // return callback(null,{data:response})
         })
+
+        
+        let list=booking.filter(e=>e==data.username)
+        
+        if(list.length>0){
+            return callback(
+               null,{message:"Already registered"}
+            )
+        }
+       
+        if(booking.length > limit){
+            return callback({
+                message:"Class limit reached",
+            },null)
+        }
+
+        if(booking.length > limit){
+            return callback({
+                message:"Class limit reached",
+            },null)
+        }
+        
         Classes.findOneAndUpdate({_id:data.id},{
             $set:{"booked":[...booking,data.username],}
         }).then((response) => {
