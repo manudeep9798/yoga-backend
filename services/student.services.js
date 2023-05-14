@@ -54,14 +54,11 @@ async function getAll(callback){
 }
 async function deleteUser(data,callback){
     StudentUser.findOneAndDelete({_id:data}).then((response) => {
-        console.log(response);
         callback(null,response)
     })
 }
 async function getList(data,callback){
-    console.log(data);
     StudentUser.find({email:data}).then((response) => {
-        console.log(response);
         callback(null,response)
     })
 }

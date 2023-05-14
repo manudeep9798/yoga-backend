@@ -73,13 +73,15 @@ const updateClassBooking=async(data,callback)=>{
         let limit;
         await Classes.find({_id:data.id}).then((response) => {
             booking=response[0].booked
+<<<<<<< HEAD
             limit=response[0].limit
             // return callback(null,{data:response})
+=======
+>>>>>>> 743a97cc456978a18e5745a37edcfeff628da101
         })
         await Student.find({email:data.username}).then((response) => {
             console.log("response",response[0].wishList);
             bookingClasses=response[0].wishList
-            // return callback(null,{data:response})
         })
 
         
@@ -104,7 +106,7 @@ const updateClassBooking=async(data,callback)=>{
         }
         
         Classes.findOneAndUpdate({_id:data.id},{
-            $set:{"booked":[...booking,data.username],}
+            $set:{"booked":[...booking,data.username]}
         }).then((response) => {
             Student.findOneAndUpdate({email:data.username},{
                 $set: { wishList: [...bookingClasses,data.id] } 
@@ -118,9 +120,25 @@ const updateClassBooking=async(data,callback)=>{
         },null)
     }
     }
+
+const deleteClass=(data,callback)=>{
+    try{
+            console.log(data.id);
+            Classes.deleteOne({_id:data.id}).then(response=>{
+                return callback(null,response)
+            }).catch(error=>{
+                return callback(error,null)
+            })
+    }catch(err){
+        return callback({
+            message:err.message,
+        },null)
+    }
+}
 module.exports ={
     addClass,
     getClass,
     updateClass,
-    updateClassBooking
+    updateClassBooking,
+    deleteClass
 }
