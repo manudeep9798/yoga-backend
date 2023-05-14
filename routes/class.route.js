@@ -8,5 +8,6 @@ router.post('/add',userController.addClass)
 router.post('/find',userController.getClass)
 router.put('/update',userController.updateClass)
 router.put('/updateBooking',userController.updateClassBooking)
+router.put('/delete',userController.deleteClass)
 
 module.exports = router

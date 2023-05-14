@@ -31,9 +31,17 @@ const updateClassBooking=(req,res,next)=>{
         return res.status(200).send(result)
     })
 }
+const deleteClass=(req,res,next)=>{
+    const data = req.body;
+    userService.deleteClass(data,(err,result)=>{
+        if(err) return next(err);
+        return res.status(200).send(result)
+    })
+}
 module.exports={
     addClass,
     getClass,
     updateClass,
     updateClassBooking,
+    deleteClass,
 }
