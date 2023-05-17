@@ -26,7 +26,7 @@ const startApp=async()=>{
     await app.listen(4000,()=>console.log(`on port 4000`))
     //connecting to mongodb server
     mongoose.set("strictQuery", false);
-    const db=await mongoose.connect(`mongodb://localhost:27017/yoga-test`,{
+    const db=await mongoose.connect(`mongodb+srv://srinivaasjag:london123@yoga.nq7sdpc.mongodb.net/test`,{
         useNewUrlParser: true,useUnifiedTopology: true
     },(err)=>{
         if(err)console.log('error is ', err)

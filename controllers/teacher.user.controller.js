@@ -23,7 +23,8 @@ const login = (req,res,next)=>{
         if(err) return next(err);
         return res.status(200).cookie('auth-token-yoga', process.env.ACCESS_TOKEN_SECRET + ' ' + result.token,{httpOnly: true}).send({
             message:"Success",
-            token: result.token
+            token: result.token,
+            user:result.data
         })
     })
 }

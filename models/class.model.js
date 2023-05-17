@@ -34,6 +34,10 @@ const classSchema=new Schema({
         type:Array,
         default:[]
     },
+    wishList:{
+        type:Array,
+        default:[]
+    },
 })
 
 classSchema.set("toJSON",{

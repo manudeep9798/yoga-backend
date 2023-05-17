@@ -23,7 +23,16 @@ const addClass=async (data,callback)=>{
 const getClass=(data,callback)=>{
     try{
         if(data.author!==""){
-            const classes = Classes.find()
+            const classes = Classes.aggregate([
+                {
+                  $lookup: {
+                    from: "teacherusers",
+                    localField: "author",
+                    foreignField: "email",
+                    as: "auth"
+                  }
+                }
+              ])
             .then((response) => {
                 return callback(null,response)
             })
@@ -31,7 +40,9 @@ const getClass=(data,callback)=>{
                 return callback(err)
             })
         }else{
+
             const classes = Classes.find({author:data.author})
+
             .then((response) => {
                 return callback(null,response)
             })
@@ -66,8 +77,9 @@ try{
 }
 }
 const updateClassBooking=async(data,callback)=>{
+    
     try{
-        console.log(data);
+        console.log(data.id);
         var booking=[]
         var bookingClasses=[]
         let limit;
@@ -90,13 +102,13 @@ const updateClassBooking=async(data,callback)=>{
             )
         }
        
-        if(booking.length > limit){
+        if(booking.length >= limit){
             return callback({
                 message:"Class limit reached",
             },null)
         }
 
-        if(booking.length > limit){
+        if(booking.length >= limit){
             return callback({
                 message:"Class limit reached",
             },null)

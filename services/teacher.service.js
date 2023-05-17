@@ -12,7 +12,7 @@ async function login({email,password},callback){
     }else{
         if(bcrypt.compareSync(password,user.password)){
             const token = auth.generateAccessToken(email);
-            return callback(null, {...user.toJSON(),token});
+            return callback(null, {...user.toJSON(),token,data:user});
         }
         else{
             return callback({

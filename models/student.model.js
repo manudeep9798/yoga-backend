@@ -28,6 +28,10 @@ const studentSchema=new Schema({
     date:{
         type:Date,
         default:Date.now()
+    },
+    list:{
+        type:Array,
+       
     }
 })
 
