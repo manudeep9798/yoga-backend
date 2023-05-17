@@ -62,7 +62,7 @@ const findAuthor=async(req,res,next)=>{
     })
 }
 const verify=async(req,res,next)=>{
-    userService.verify(req.body.id,(err,result)=>{
+    userService.verify(req.body,(err,result)=>{
         if(err){
             res.status(400).json({err})
         }else{

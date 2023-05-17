@@ -68,8 +68,8 @@ async function getAll(callback){
     
 }
 async function verify(data,callback){
-    TeacherUser.findOneAndUpdate({_id:data},{
-        $set:{"verified":true}
+    TeacherUser.findOneAndUpdate({_id:data.id},{
+        $set:{"verified":data.status}
     }).then((response) => {
         callback(null,response)
     })
