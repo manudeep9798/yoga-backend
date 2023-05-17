@@ -1,3 +1,4 @@
+
 const Classes=require('../models/class.model');
 const Student=require('../models/student.model');
 
@@ -79,8 +80,8 @@ try{
 const updateClassBooking=async(data,callback)=>{
     
     try{
-        console.log(data.id);
         var booking=[]
+        var flag=false
         var bookingClasses=[]
         let limit;
         await Classes.find({_id:data.id}).then((response) => {
@@ -89,7 +90,6 @@ const updateClassBooking=async(data,callback)=>{
             // return callback(null,{data:response})
         })
         await Student.find({email:data.username}).then((response) => {
-            console.log("response",response[0].wishList);
             bookingClasses=response[0].wishList
         })
 
@@ -113,15 +113,44 @@ const updateClassBooking=async(data,callback)=>{
                 message:"Class limit reached",
             },null)
         }
-        
-        Classes.findOneAndUpdate({_id:data.id},{
-            $set:{"booked":[...booking,data.username]}
-        }).then((response) => {
-            Student.findOneAndUpdate({email:data.username},{
-                $set: { wishList: [...bookingClasses,data.id] } 
-            }).then(res=>{
-                return callback(null,{data:response})
-            })
+        let currentClassTimeBeg;
+        let currentClassTimeEnd;;
+        await Classes.findOne({_id:data.id}).then(res=>{
+            currentClassTimeBeg=new Date(res.from)
+            currentClassTimeEnd=new Date(res.to)            
+        })
+        await Student.findOne({email:data.username}).then(res=>{
+                Classes.find({_id:res.wishList}).then(response=>{
+                    const array=response
+                    array.forEach(ele=>{
+                        const thisFrom=new Date(ele.from);
+                        const thisTo=new Date(ele.to);
+                        if(thisFrom<=currentClassTimeEnd&&thisFrom>=currentClassTimeBeg){
+                                console.log("here1");
+                                flag=true
+                        }else if(thisTo>=currentClassTimeBeg&&thisTo<=currentClassTimeEnd){
+                                    console.log("here2");
+                                    flag=true
+                        }
+                    })
+                }).then(() => {
+                    if(flag==true){
+                        return callback(null,{data:"coinciding class time"})
+                    }else{
+                        Classes.findOneAndUpdate({_id:data.id},{
+                            $set:{"booked":[...booking,data.username]}
+                            
+                        }).then((response) => {
+                            Student.findOneAndUpdate({email:data.username},{
+                                $set: { wishList: [...bookingClasses,data.id] } 
+                            }).then(res=>{
+                             
+                           return callback(null,{data:response})
+                            })
+                        })
+                    }
+                })
+
         })
     }catch(err){
         return callback({
@@ -132,7 +161,7 @@ const updateClassBooking=async(data,callback)=>{
 
 const deleteClass=(data,callback)=>{
     try{
-            console.log(data.id);
+            console.log(data);
             Classes.deleteOne({_id:data.id}).then(response=>{
                 return callback(null,response)
             }).catch(error=>{
