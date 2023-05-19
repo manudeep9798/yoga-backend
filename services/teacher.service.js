@@ -1,4 +1,5 @@
 const TeacherUser=require('../models/teacher.model');
+const Classes = require('../models/class.model')
 const bcrypt = require('bcrypt');
 const auth = require('../middlewares/auth_teacher');
 
@@ -75,9 +76,12 @@ async function verify(data,callback){
     })
     
 }
-async function deleteUser(data,callback){
+async function deleteUser(data,email,callback){
     TeacherUser.findOneAndDelete({_id:data}).then((response) => {
-        callback(null,response)
+        Classes.deleteMany({author:email}).then((res) => {
+            console.log(res);
+            callback(null,res)
+        })
     })
     
 }

@@ -71,7 +71,7 @@ const verify=async(req,res,next)=>{
     })
 }
 const deleteUser=async(req,res,next)=>{
-    userService.deleteUser(req.body.id,(err,result)=>{
+    userService.deleteUser(req.body.id,req.body.email,(err,result)=>{
         if(err){
             res.status(400).json({err})
         }else{
